@@ -7,7 +7,9 @@ FFMPEG_LIBS=    libavdevice                        \
                 libswscale                         \
                 libavutil                          \
 
-CFLAGS += -Wall -O2 -g -I /usr/local/include -L /usr/local/lib
+CFLAGS += -Wall -O2 -g -std=c99
+CFLAGS += -I /usr/local/include
+CFLAGS += -L /usr/local/lib
 CFLAGS := $(shell /usr/bin/pkg-config --cflags $(FFMPEG_LIBS)) $(CFLAGS)
 
 LDLIBS := $(shell /usr/bin/pkg-config --libs $(FFMPEG_LIBS)) $(LDLIBS)
@@ -18,7 +20,9 @@ muxing:            LDLIBS += -lm
 
 .phony: all clean-test clean
 
-SRCS=mkvid
+SRCS=    encode_example     \
+				 mux_example
+
 
 OBJS=$(addsuffix .o,$(SRCS))
 
