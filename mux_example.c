@@ -11,7 +11,7 @@
 #include <libswscale/swscale.h>
 #include <libswresample/swresample.h>
 
-#define STREAM_DURATION   10.0
+#define STREAM_DURATION   100.0
 #define STREAM_FRAME_RATE 25 /* 25 images/s */
 #define STREAM_PIX_FMT    AV_PIX_FMT_YUV420P /* default pix_fmt */
 
@@ -71,6 +71,8 @@ static void add_stream(OutputStream *ost, AVFormatContext *oc,
     ost->st->id = oc->nb_streams-1;
     c = ost->st->codec;
 
+    c->strict_std_compliance = FF_COMPLIANCE_EXPERIMENTAL;
+
     switch ((*codec)->type) {
     case AVMEDIA_TYPE_AUDIO:
         c->sample_fmt  = (*codec)->sample_fmts ?
@@ -100,8 +102,6 @@ static void add_stream(OutputStream *ost, AVFormatContext *oc,
     case AVMEDIA_TYPE_VIDEO:
         c->codec_id = codec_id;
 
-        c->strict_std_compliance = FF_COMPLIANCE_EXPERIMENTAL;
-
         c->bit_rate = 400000;
         /* Resolution must be a multiple of two. */
         c->width    = 352;
@@ -114,7 +114,7 @@ static void add_stream(OutputStream *ost, AVFormatContext *oc,
         c->time_base       = ost->st->time_base;
 
         c->gop_size      = 12; /* emit one intra frame every twelve frames at most */
-        c->pix_fmt       = STREAM_PIX_FMT;
+        c->pix_fmt       = AV_PIX_FMT_YUV420P;
         if (c->codec_id == AV_CODEC_ID_MPEG2VIDEO) {
             /* just for testing, we also add B frames */
             c->max_b_frames = 2;
