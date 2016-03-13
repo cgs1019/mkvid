@@ -1,0 +1,20 @@
+immediate todos:
+  expand data schema
+  automate database backup asap
+  decide on wire format (json/protobuf/capnproto/thrift)
+  figure out sessions -- end when tab closed for now?
+  session storage -- db for now? then what?
+  minimum viable secure auth -- punt on "remember me"?
+
+color picker:
+  grid
+  start with various hues
+  clicking one centers it and shows related variations 
+  can drag one we like to a palette
+  back/forward history buttons
+  integrate with standard (?) yarn/thread color codes?
+
+pattern types:
+  cross-stitch - grid-based, easiest
+  embroidery - free-form, silk-stitch, etc. trickier (basically vector gfx?)
+  crochet/knit - expression/repetition; programmable?
